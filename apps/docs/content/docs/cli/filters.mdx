@@ -1,48 +1,48 @@
 ---
 title: filters
-description: Decouvrir les filtres disponibles pour affiner vos recherches.
+description: Discover available filters to refine your searches.
 ---
 
 ## mobbin filters
 
-Avant de chercher, il est utile de savoir quels filtres existent. La commande `filters` vous donne acces au dictionnaire complet des patterns, elements UI et categories.
+Before searching, it is useful to know which filters exist. The `filters` command gives you access to the complete dictionary of patterns, UI elements, and categories.
 
 ---
 
 ### list
 
 ```bash
-# Voir toutes les categories de filtres
+# View all filter categories
 mobbin filters list
 
-# Voir les patterns d'ecran disponibles (110+)
+# View available screen patterns (110+)
 mobbin filters list -c screenPatterns
 
-# Voir les elements UI
+# View UI elements
 mobbin filters list -c screenElements -t
 
-# Voir les categories d'apps
+# View app categories
 mobbin filters list -c appCategories
 
-# Voir les actions de flow
+# View flow actions
 mobbin filters list -c flowActions
 ```
 
-**Categories de filtres :**
+**Filter categories:**
 
-| Slug | Description | Exemples |
+| Slug | Description | Examples |
 |------|-------------|----------|
-| `screenPatterns` | Types d'ecrans | Login, Signup, Checkout, Settings, Home, Onboarding |
-| `screenElements` | Composants UI | Button, Card, Bottom Sheet, Dialog, Toast, Tab Bar |
-| `appCategories` | Categories d'apps | Finance, Shopping, Entertainment, Health & Fitness |
-| `flowActions` | Actions utilisateur | Creating Account, Filtering & Sorting, Editing Profile |
-| `styles` | Styles visuels | Dark Mode, Glassmorphism, Minimalist |
+| `screenPatterns` | Screen types | Login, Signup, Checkout, Settings, Home, Onboarding |
+| `screenElements` | UI components | Button, Card, Bottom Sheet, Dialog, Toast, Tab Bar |
+| `appCategories` | App categories | Finance, Shopping, Entertainment, Health & Fitness |
+| `flowActions` | User actions | Creating Account, Filtering & Sorting, Editing Profile |
+| `styles` | Visual styles | Dark Mode, Glassmorphism, Minimalist |
 
-Chaque entree du dictionnaire contient un `displayName`, une `definition` et des `synonyms`, ce qui permet de comprendre exactement ce que chaque filtre represente.
+Each dictionary entry contains a `displayName`, a `definition`, and `synonyms`, which helps you understand exactly what each filter represents.
 
-**Astuce :** Utilisez les filtres en combinaison dans `screens search` pour des resultats tres precis :
+**Tip:** Use filters in combination with `screens search` for very precise results:
 
 ```bash
-# Ecrans de paywall dans les apps Health & Fitness avec un style dark
+# Paywall screens in Health & Fitness apps with a dark style
 mobbin screens search --patterns "Subscription & Paywall" -c "Health & Fitness"
 ```

@@ -6,7 +6,7 @@ export default function HomePage() {
 			<div className="max-w-3xl text-center">
 				<div className="mb-6 inline-flex items-center gap-2 rounded-full border border-fd-border bg-fd-card px-4 py-1.5 text-sm text-fd-muted-foreground">
 					<span className="inline-block h-2 w-2 rounded-full bg-green-500" />
-					v1.0.0 disponible sur npm
+					v1.0.0 available on npm
 				</div>
 
 				<h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl">
@@ -18,15 +18,15 @@ export default function HomePage() {
 				</h1>
 
 				<p className="mt-6 text-lg leading-relaxed text-fd-muted-foreground sm:text-xl">
-					Recherchez, explorez et telechargez des references de design UI directement depuis votre
-					terminal. Accedez a des milliers d&apos;ecrans d&apos;apps iOS, Android et Web.
+					Search, explore and download UI design references directly from your terminal. Access
+					thousands of iOS, Android and Web app screens.
 				</p>
 
 				<div className="mt-4 flex flex-wrap justify-center gap-3 text-sm text-fd-muted-foreground">
-					<span className="rounded-md bg-fd-secondary px-3 py-1">826+ apps iOS</span>
+					<span className="rounded-md bg-fd-secondary px-3 py-1">826+ iOS apps</span>
 					<span className="rounded-md bg-fd-secondary px-3 py-1">110+ patterns</span>
-					<span className="rounded-md bg-fd-secondary px-3 py-1">3 plateformes</span>
-					<span className="rounded-md bg-fd-secondary px-3 py-1">0 dependance runtime (SDK)</span>
+					<span className="rounded-md bg-fd-secondary px-3 py-1">3 platforms</span>
+					<span className="rounded-md bg-fd-secondary px-3 py-1">0 runtime dependency (SDK)</span>
 				</div>
 
 				<div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -40,7 +40,7 @@ export default function HomePage() {
 						href="/docs/cli"
 						className="rounded-lg border border-fd-border px-6 py-3 font-medium transition-colors hover:bg-fd-accent"
 					>
-						Guide CLI
+						CLI Guide
 					</Link>
 					<Link
 						href="https://github.com/yabbal/mobbin"
@@ -51,21 +51,21 @@ export default function HomePage() {
 				</div>
 
 				<div className="mt-16 rounded-xl border border-fd-border bg-fd-card p-6 text-left">
-					<p className="mb-3 text-sm font-medium text-fd-muted-foreground">Demarrage rapide</p>
+					<p className="mb-3 text-sm font-medium text-fd-muted-foreground">Quick start</p>
 					<pre className="overflow-x-auto text-sm leading-relaxed">
 						<code>{`# Installation
 pnpm add -g mobbin-cli
 
-# Connexion
+# Login
 mobbin auth login
 
-# Rechercher des ecrans de login
+# Search for login screens
 mobbin screens search --patterns Login
 
-# Telecharger 5 references de signup
+# Download 5 signup references
 mobbin screens download --patterns Signup -l 5 -o ./refs
 
-# Copier un ecran dans le presse-papier
+# Copy a screen to the clipboard
 mobbin screens copy --patterns Checkout`}</code>
 					</pre>
 				</div>
@@ -73,26 +73,26 @@ mobbin screens copy --patterns Checkout`}</code>
 				<div className="mt-16 grid gap-6 text-left sm:grid-cols-3">
 					<div className="rounded-xl border border-fd-border bg-fd-card p-6">
 						<div className="mb-3 text-2xl">🔍</div>
-						<h3 className="mb-2 font-semibold">Recherche avancee</h3>
+						<h3 className="mb-2 font-semibold">Advanced search</h3>
 						<p className="text-sm text-fd-muted-foreground">
-							Filtrez par patterns (Login, Signup, Checkout...), elements UI (Button, Card,
-							Dialog...), categories d&apos;apps et mots-cles OCR.
+							Filter by patterns (Login, Signup, Checkout...), UI elements (Button, Card,
+							Dialog...), app categories and OCR keywords.
 						</p>
 					</div>
 					<div className="rounded-xl border border-fd-border bg-fd-card p-6">
 						<div className="mb-3 text-2xl">📥</div>
-						<h3 className="mb-2 font-semibold">Telechargement direct</h3>
+						<h3 className="mb-2 font-semibold">Direct download</h3>
 						<p className="text-sm text-fd-muted-foreground">
-							Telechargez les images en haute qualite ou copiez-les directement dans votre
-							presse-papier. Fonctionne sur macOS, Linux et Windows.
+							Download high-quality images or copy them directly to your clipboard. Works on macOS,
+							Linux and Windows.
 						</p>
 					</div>
 					<div className="rounded-xl border border-fd-border bg-fd-card p-6">
 						<div className="mb-3 text-2xl">🤖</div>
-						<h3 className="mb-2 font-semibold">Integration IA</h3>
+						<h3 className="mb-2 font-semibold">AI integration</h3>
 						<p className="text-sm text-fd-muted-foreground">
-							Sortie JSON par defaut, pensee pour les agents IA. Utilisable comme skill Claude Code
-							pour enrichir vos workflows de design.
+							JSON output by default, designed for AI agents. Usable as a Claude Code skill to
+							enhance your design workflows.
 						</p>
 					</div>
 				</div>

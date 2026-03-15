@@ -1,18 +1,18 @@
 ---
 title: SDK
-description: SDK TypeScript pour l'API Mobbin — zero dependance, utilise fetch natif.
+description: TypeScript SDK for the Mobbin API — zero dependencies, uses native fetch.
 ---
 
 ## mobbin-sdk
 
-Le SDK TypeScript vous permet d'integrer Mobbin dans vos applications, scripts ou agents IA. Il est concu pour etre leger et simple d'utilisation.
+The TypeScript SDK allows you to integrate Mobbin into your applications, scripts, or AI agents. It is designed to be lightweight and easy to use.
 
-### Caracteristiques
+### Features
 
-- **Zero dependance runtime** — utilise `fetch` natif (Node.js 18+)
-- **TypeScript first** — types complets pour toutes les reponses API
-- **Gestion automatique des sessions** — refresh token automatique
-- **Auth via cookies Supabase** — compatible avec l'API Mobbin
+- **Zero runtime dependencies** — uses native `fetch` (Node.js 18+)
+- **TypeScript first** — complete types for all API responses
+- **Automatic session management** — automatic token refresh
+- **Auth via Supabase cookies** — compatible with the Mobbin API
 
 ### Installation
 
@@ -20,50 +20,50 @@ Le SDK TypeScript vous permet d'integrer Mobbin dans vos applications, scripts o
 pnpm add mobbin-sdk
 ```
 
-### Initialisation
+### Initialization
 
 ```typescript
 import { MobbinClient } from "mobbin-sdk";
 
-// Option 1 : Login avec credentials
+// Option 1: Login with credentials
 const client = new MobbinClient({
   credentials: { email: "user@example.com", password: "..." },
 });
-await client.init(); // Se connecte automatiquement
+await client.init(); // Logs in automatically
 
-// Option 2 : Session existante (depuis un fichier, un store, etc.)
+// Option 2: Existing session (from a file, a store, etc.)
 const client = new MobbinClient({ session: savedSession });
 await client.init();
 
-// Option 3 : Client sans auth (pour les endpoints publics)
+// Option 3: Client without auth (for public endpoints)
 const client = new MobbinClient();
 ```
 
-### Ressources disponibles
+### Available resources
 
-| Ressource | Methodes | Description |
-|-----------|----------|-------------|
-| [`client.auth`](/docs/sdk/auth) | `checkEmail`, `login`, `refresh`, `getUser` | Authentification |
-| [`client.screens`](/docs/sdk/screens) | `search`, `download` | Ecrans de design |
-| [`client.apps`](/docs/sdk/apps) | `search`, `list`, `popular` | Catalogue d'apps |
-| [`client.filters`](/docs/sdk/filters) | `list` | Dictionnaire de filtres |
-| [`client.collections`](/docs/sdk/collections) | `list` | Collections utilisateur |
+| Resource | Methods | Description |
+|----------|---------|-------------|
+| [`client.auth`](/docs/sdk/auth) | `checkEmail`, `login`, `refresh`, `getUser` | Authentication |
+| [`client.screens`](/docs/sdk/screens) | `search`, `download` | Design screens |
+| [`client.apps`](/docs/sdk/apps) | `search`, `list`, `popular` | App catalog |
+| [`client.filters`](/docs/sdk/filters) | `list` | Filter dictionary |
+| [`client.collections`](/docs/sdk/collections) | `list` | User collections |
 
-### Types principaux
+### Main types
 
 ```typescript
 import type {
   Platform,        // "ios" | "android" | "web"
   SortBy,          // "trending" | "publishedAt" | "popularity"
-  Screen,          // Ecran avec metadata, patterns, elements, CDN URLs
-  SearchableApp,   // App du catalogue
-  PopularApp,      // App populaire
-  DictionaryCategory, // Categorie de filtres
-  SupabaseSession, // Session d'authentification
+  Screen,          // Screen with metadata, patterns, elements, CDN URLs
+  SearchableApp,   // App from the catalog
+  PopularApp,      // Popular app
+  DictionaryCategory, // Filter category
+  SupabaseSession, // Authentication session
 } from "mobbin-sdk";
 ```
 
-### Exemple complet
+### Complete example
 
 ```typescript
 import { MobbinClient } from "mobbin-sdk";
@@ -74,7 +74,7 @@ const client = new MobbinClient({
 });
 await client.init();
 
-// Rechercher des ecrans de checkout dans les apps Finance
+// Search for checkout screens in Finance apps
 const result = await client.screens.search(
   {
     platform: "ios",
@@ -84,12 +84,12 @@ const result = await client.screens.search(
   { pageSize: 5, sortBy: "popularity" },
 );
 
-console.log(`${result.data.length} ecrans trouves`);
+console.log(`${result.data.length} screens found`);
 
-// Telecharger le premier ecran
+// Download the first screen
 const screen = result.data[0];
 const buffer = await client.screens.download(screen.screenCdnImgSources.src);
 await writeFile(`${screen.appName}_checkout.webp`, Buffer.from(buffer));
 
-console.log(`Telecharge: ${screen.appName} (${screen.screenPatterns.join(", ")})`);
+console.log(`Downloaded: ${screen.appName} (${screen.screenPatterns.join(", ")})`);
 ```

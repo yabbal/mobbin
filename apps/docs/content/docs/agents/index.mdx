@@ -1,27 +1,27 @@
 ---
-title: Agents IA
-description: Integrer Mobbin avec des agents IA comme Claude Code pour enrichir vos workflows de design.
+title: AI Agents
+description: Integrate Mobbin with AI agents like Claude Code to enrich your design workflows.
 ---
 
-## Mobbin pour les agents IA
+## Mobbin for AI agents
 
-Le CLI et le SDK Mobbin sont concus pour etre utilises par des agents IA. Toutes les commandes produisent du **JSON structure** sur `stdout`, ce qui les rend facilement parsables par des LLMs.
+The Mobbin CLI and SDK are designed to be used by AI agents. All commands produce **structured JSON** on `stdout`, making them easily parsable by LLMs.
 
-### Pourquoi utiliser Mobbin avec un agent IA ?
+### Why use Mobbin with an AI agent?
 
-Quand un agent IA (comme Claude Code) travaille sur une interface, il peut :
+When an AI agent (like Claude Code) is working on an interface, it can:
 
-1. **Rechercher des references** — "Montre-moi comment les apps Finance font leur ecran de login"
-2. **Telecharger des inspirations** — Obtenir des images reelles d'apps populaires
-3. **Analyser des patterns** — Comprendre quels patterns UI sont tendance
-4. **Comparer des approches** — Voir comment differentes apps resolvent le meme probleme UX
+1. **Search for references** — "Show me how Finance apps do their login screen"
+2. **Download inspirations** — Get real images from popular apps
+3. **Analyze patterns** — Understand which UI patterns are trending
+4. **Compare approaches** — See how different apps solve the same UX problem
 
-### Sortie JSON par defaut
+### JSON output by default
 
-Contrairement a la plupart des CLIs, Mobbin CLI produit du JSON par defaut (pas du texte formatte). C'est un choix delibere pour faciliter l'integration avec des agents :
+Unlike most CLIs, Mobbin CLI outputs JSON by default (not formatted text). This is a deliberate choice to facilitate integration with agents:
 
 ```bash
-# L'agent peut parser directement la sortie
+# The agent can directly parse the output
 mobbin screens search --patterns Login -l 3
 ```
 

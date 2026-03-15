@@ -1,11 +1,11 @@
 ---
 title: CLI
-description: Guide complet du CLI Mobbin — recherchez, telechargez et explorez des designs UI depuis votre terminal.
+description: Complete guide to the Mobbin CLI — search, download, and explore UI designs from your terminal.
 ---
 
 ## mobbin-cli
 
-Le CLI Mobbin transforme votre terminal en outil de recherche de design. Il se connecte a l'API Mobbin pour vous donner acces a des milliers de references UI sans quitter votre workflow.
+The Mobbin CLI turns your terminal into a design search tool. It connects to the Mobbin API to give you access to thousands of UI references without leaving your workflow.
 
 ### Installation
 
@@ -13,57 +13,57 @@ Le CLI Mobbin transforme votre terminal en outil de recherche de design. Il se c
 pnpm add -g mobbin-cli
 ```
 
-Apres installation, la commande `mobbin` est disponible globalement.
+After installation, the `mobbin` command is available globally.
 
-### Premiere utilisation
+### First use
 
 ```bash
-# Verifier l'installation
+# Verify the installation
 mobbin version
 
-# Se connecter
+# Log in
 mobbin auth login
 
-# Lancer votre premiere recherche
+# Run your first search
 mobbin screens search --patterns Login -l 5
 ```
 
-### Commandes disponibles
+### Available commands
 
-| Commande | Description |
-|----------|-------------|
-| [`mobbin auth`](/docs/cli/auth) | Se connecter, se deconnecter, verifier le statut |
-| [`mobbin screens`](/docs/cli/screens) | Rechercher, telecharger et copier des ecrans |
-| [`mobbin apps`](/docs/cli/apps) | Explorer le catalogue d'applications |
-| [`mobbin filters`](/docs/cli/filters) | Decouvrir les filtres disponibles |
-| [`mobbin collections`](/docs/cli/collections) | Gerer vos collections sauvegardees |
-| `mobbin version` | Afficher la version du CLI |
+| Command | Description |
+|---------|-------------|
+| [`mobbin auth`](/docs/cli/auth) | Log in, log out, check status |
+| [`mobbin screens`](/docs/cli/screens) | Search, download, and copy screens |
+| [`mobbin apps`](/docs/cli/apps) | Explore the application catalog |
+| [`mobbin filters`](/docs/cli/filters) | Discover available filters |
+| [`mobbin collections`](/docs/cli/collections) | Manage your saved collections |
+| `mobbin version` | Display the CLI version |
 
-### Format de sortie
+### Output format
 
-Par defaut, toutes les commandes produisent du **JSON** sur `stdout`. C'est ideal pour :
+By default, all commands output **JSON** to `stdout`. This is ideal for:
 
-- Le piping vers `jq` ou d'autres outils
-- L'integration avec des agents IA (Claude Code, etc.)
-- L'automatisation dans des scripts
+- Piping to `jq` or other tools
+- Integration with AI agents (Claude Code, etc.)
+- Automation in scripts
 
-Pour un affichage humain en tableau, ajoutez `--table` ou `-t` :
+For a human-readable table display, add `--table` or `-t`:
 
 ```bash
-# JSON (defaut)
+# JSON (default)
 mobbin apps popular | jq '.[0:3] | .[].app_name'
 
-# Tableau
+# Table
 mobbin apps popular -t
 ```
 
-### Filtres globaux
+### Global filters
 
-La plupart des commandes de recherche partagent ces options :
+Most search commands share these options:
 
-| Option | Alias | Description | Valeurs |
-|--------|-------|-------------|---------|
-| `--platform` | `-p` | Plateforme cible | `ios` (defaut), `android`, `web` |
-| `--sort` | `-s` | Tri des resultats | `trending` (defaut), `publishedAt`, `popularity` |
-| `--limit` | `-l` | Nombre de resultats | Nombre (defaut: 24) |
-| `--table` | `-t` | Affichage en tableau | Flag |
+| Option | Alias | Description | Values |
+|--------|-------|-------------|--------|
+| `--platform` | `-p` | Target platform | `ios` (default), `android`, `web` |
+| `--sort` | `-s` | Sort results | `trending` (default), `publishedAt`, `popularity` |
+| `--limit` | `-l` | Number of results | Number (default: 24) |
+| `--table` | `-t` | Table display | Flag |

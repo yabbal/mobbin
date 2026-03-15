@@ -1,26 +1,26 @@
 ---
 title: apps
-description: Explorer le catalogue d'applications referencees sur Mobbin.
+description: Explore the catalog of applications referenced on Mobbin.
 ---
 
 ## mobbin apps
 
-Explorez les applications referencees sur Mobbin. Chaque app contient des dizaines d'ecrans captures et annotes.
+Explore the applications referenced on Mobbin. Each app contains dozens of captured and annotated screens.
 
 ---
 
 ### search
 
-Recherchez des apps par categorie.
+Search for apps by category.
 
 ```bash
-# Apps Finance sur iOS
+# Finance apps on iOS
 mobbin apps search -c Finance
 
-# Apps Shopping et Entertainment
+# Shopping and Entertainment apps
 mobbin apps search -c "Shopping,Entertainment" -l 10
 
-# Apps web
+# Web apps
 mobbin apps search -p web -l 5
 ```
 
@@ -28,16 +28,16 @@ mobbin apps search -p web -l 5
 
 ### list
 
-Affichez le catalogue complet d'une plateforme. Utile pour savoir quelles apps sont disponibles.
+Display the complete catalog for a platform. Useful for knowing which apps are available.
 
 ```bash
-# Toutes les apps iOS (800+)
+# All iOS apps (800+)
 mobbin apps list -p ios
 
-# Toutes les apps web
+# All web apps
 mobbin apps list -p web
 
-# En tableau (50 premiers)
+# As a table (first 50)
 mobbin apps list -t
 ```
 
@@ -45,20 +45,20 @@ mobbin apps list -t
 
 ### popular
 
-Decouvrez les apps les plus populaires, organisees par categorie.
+Discover the most popular apps, organized by category.
 
 ```bash
-# Apps populaires iOS
+# Popular iOS apps
 mobbin apps popular
 
-# En tableau
+# As a table
 mobbin apps popular -t
 
-# Apps populaires web, 5 par categorie
+# Popular web apps, 5 per category
 mobbin apps popular -p web -l 5
 ```
 
-**Exemple de sortie (tableau) :**
+**Example output (table):**
 
 ```
 ┌──────────────────┬────────────┬────────────┐

@@ -1,40 +1,40 @@
 ---
 title: Introduction
-description: CLI et SDK TypeScript non officiels pour rechercher et telecharger des references de design UI depuis Mobbin.
+description: Unofficial TypeScript CLI and SDK to search and download UI design references from Mobbin.
 ---
 
-## Qu'est-ce que Mobbin CLI & SDK ?
+## What is Mobbin CLI & SDK?
 
-[Mobbin](https://mobbin.com/) est une plateforme de reference pour le design UI/UX. Elle catalogue des milliers d'ecrans d'applications mobiles et web, organises par patterns, elements UI et categories.
+[Mobbin](https://mobbin.com/) is a reference platform for UI/UX design. It catalogs thousands of mobile and web application screens, organized by patterns, UI elements, and categories.
 
-**Mobbin CLI & SDK** sont des outils non officiels qui vous permettent d'acceder a tout ce contenu **directement depuis votre terminal ou votre code TypeScript**, sans passer par le navigateur.
+**Mobbin CLI & SDK** are unofficial tools that allow you to access all this content **directly from your terminal or TypeScript code**, without using a browser.
 
-### A qui s'adresse cet outil ?
+### Who is this tool for?
 
-- **Designers** qui veulent rapidement telecharger des references pour un projet
-- **Developpeurs** qui implementent des interfaces et cherchent de l'inspiration
-- **Agents IA** (Claude Code, etc.) qui ont besoin d'acceder a des references visuelles programmatiquement
-- **Equipes produit** qui veulent analyser les patterns UI de leurs concurrents
+- **Designers** who want to quickly download references for a project
+- **Developers** who are implementing interfaces and looking for inspiration
+- **AI Agents** (Claude Code, etc.) that need to access visual references programmatically
+- **Product teams** who want to analyze the UI patterns of their competitors
 
-### Ce que vous pouvez faire
+### What you can do
 
-- **Rechercher** des ecrans par pattern (Login, Signup, Checkout, Onboarding...), par element UI (Button, Card, Dialog...), par categorie d'app (Finance, Shopping...) ou par texte visible dans les screenshots (OCR)
-- **Telecharger** des images d'ecrans en haute qualite
-- **Copier** un ecran directement dans votre presse-papier
-- **Explorer** le catalogue de 800+ apps sur iOS, Android et Web
-- **Lister** les filtres disponibles pour affiner vos recherches
+- **Search** screens by pattern (Login, Signup, Checkout, Onboarding...), by UI element (Button, Card, Dialog...), by app category (Finance, Shopping...) or by visible text in screenshots (OCR)
+- **Download** high-quality screen images
+- **Copy** a screen directly to your clipboard
+- **Explore** the catalog of 800+ apps on iOS, Android, and Web
+- **List** available filters to refine your searches
 
 ---
 
 ## Installation
 
-**CLI** — pour une utilisation en ligne de commande :
+**CLI** — for command-line usage:
 
 ```bash
 pnpm add -g mobbin-cli
 ```
 
-**SDK** — pour une utilisation dans du code TypeScript :
+**SDK** — for usage in TypeScript code:
 
 ```bash
 pnpm add mobbin-sdk
@@ -42,60 +42,60 @@ pnpm add mobbin-sdk
 
 ---
 
-## Demarrage rapide
+## Quick start
 
-### 1. Connectez-vous a votre compte Mobbin
+### 1. Log in to your Mobbin account
 
 ```bash
 mobbin auth login
 ```
 
-Le CLI vous demandera votre email et mot de passe. La session est stockee localement dans `~/.config/mobbin/auth.json`.
+The CLI will ask for your email and password. The session is stored locally in `~/.config/mobbin/auth.json`.
 
-### 2. Recherchez des ecrans
+### 2. Search for screens
 
 ```bash
-# Ecrans de login des apps iOS
+# Login screens from iOS apps
 mobbin screens search --patterns Login
 
-# Ecrans de checkout dans les apps Shopping, tries par popularite
+# Checkout screens in Shopping apps, sorted by popularity
 mobbin screens search --patterns Checkout -c Shopping --sort popularity
 
-# Ecrans avec des Bottom Sheets
+# Screens with Bottom Sheets
 mobbin screens search --elements "Bottom Sheet" -l 10
 ```
 
-### 3. Telechargez des references
+### 3. Download references
 
 ```bash
-# Telecharger 5 ecrans de signup dans un dossier
+# Download 5 signup screens into a folder
 mobbin screens download --patterns Signup -l 5 -o ./design-refs
 ```
 
-### 4. Copiez dans le presse-papier
+### 4. Copy to clipboard
 
 ```bash
-# Copie le premier resultat directement
+# Copy the first result directly
 mobbin screens copy --patterns "Subscription & Paywall"
 ```
 
 ---
 
-## Plateformes supportees
+## Supported platforms
 
-| Plateforme | Description | Nombre d'apps |
-|-----------|-------------|---------------|
-| **iOS** | Applications iPhone/iPad | 800+ |
-| **Android** | Applications Android | 200+ |
-| **Web** | Sites et applications web | 100+ |
+| Platform | Description | Number of apps |
+|----------|-------------|----------------|
+| **iOS** | iPhone/iPad applications | 800+ |
+| **Android** | Android applications | 200+ |
+| **Web** | Websites and web applications | 100+ |
 
 ---
 
-## Deux packages, un ecosysteme
+## Two packages, one ecosystem
 
-| Package | Description | Quand l'utiliser |
-|---------|-------------|-----------------|
-| [**mobbin-cli**](/docs/cli) | Interface en ligne de commande | Recherche rapide, telechargement, integration dans des scripts |
-| [**mobbin-sdk**](/docs/sdk) | SDK TypeScript | Integration dans vos applications, agents IA, automatisation |
+| Package | Description | When to use |
+|---------|-------------|-------------|
+| [**mobbin-cli**](/docs/cli) | Command-line interface | Quick search, download, script integration |
+| [**mobbin-sdk**](/docs/sdk) | TypeScript SDK | Integration in your applications, AI agents, automation |
 
-Le CLI utilise le SDK en interne. Les deux packages sont publies sur npm avec provenance OIDC.
+The CLI uses the SDK internally. Both packages are published on npm with OIDC provenance.

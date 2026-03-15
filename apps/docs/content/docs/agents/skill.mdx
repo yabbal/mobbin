@@ -1,35 +1,35 @@
 ---
-title: Skill Claude Code
-description: Utiliser Mobbin comme skill dans Claude Code pour acceder a des references de design.
+title: Claude Code Skill
+description: Use Mobbin as a skill in Claude Code to access design references.
 ---
 
-## Skill Claude Code
+## Claude Code Skill
 
-Le fichier `SKILL.md` a la racine du projet permet a Claude Code d'utiliser le CLI Mobbin automatiquement quand vous parlez de design, de references UI ou de patterns d'ecrans.
+The `SKILL.md` file at the project root allows Claude Code to automatically use the Mobbin CLI when you talk about design, UI references, or screen patterns.
 
 ### Installation
 
-Le skill est actif automatiquement si le fichier `SKILL.md` est present dans votre projet. Il suffit de copier le fichier depuis le repo :
+The skill is automatically active if the `SKILL.md` file is present in your project. Simply copy the file from the repo:
 
 ```bash
 curl -o SKILL.md https://raw.githubusercontent.com/yabbal/mobbin/main/SKILL.md
 ```
 
-### Utilisation
+### Usage
 
-Une fois le skill installe, vous pouvez demander a Claude Code :
+Once the skill is installed, you can ask Claude Code:
 
-- *"Montre-moi des references de login pour une app Finance"*
-- *"Telecharge 5 ecrans de checkout dans ./refs"*
-- *"Quels patterns d'ecran existent sur Mobbin ?"*
-- *"Copie un ecran de paywall dans mon presse-papier"*
-- *"Quelles sont les apps les plus populaires sur iOS ?"*
+- *"Show me login references for a Finance app"*
+- *"Download 5 checkout screens into ./refs"*
+- *"What screen patterns exist on Mobbin?"*
+- *"Copy a paywall screen to my clipboard"*
+- *"What are the most popular apps on iOS?"*
 
-Claude Code utilisera automatiquement les bonnes commandes CLI.
+Claude Code will automatically use the right CLI commands.
 
-### Prerequis
+### Prerequisites
 
-Le CLI doit etre installe et authentifie :
+The CLI must be installed and authenticated:
 
 ```bash
 pnpm add -g mobbin-cli

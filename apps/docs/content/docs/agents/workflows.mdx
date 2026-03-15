@@ -1,65 +1,65 @@
 ---
 title: Workflows
-description: Exemples de workflows IA avec Mobbin pour le design et le developpement.
+description: Examples of AI workflows with Mobbin for design and development.
 ---
 
-## Workflows types
+## Typical workflows
 
-Voici des scenarios concrets ou Mobbin enrichit le travail avec un agent IA.
+Here are concrete scenarios where Mobbin enriches work with an AI agent.
 
 ---
 
-### 1. Implementer un ecran a partir de references
+### 1. Implement a screen from references
 
-Vous travaillez sur un ecran de login et voulez voir comment les meilleures apps le font :
+You are working on a login screen and want to see how the best apps do it:
 
 ```bash
-# Etape 1 : Rechercher des references
+# Step 1: Search for references
 mobbin screens search --patterns Login -c "Finance,Shopping" --sort popularity -l 10
 
-# Etape 2 : Telecharger les meilleures
+# Step 2: Download the best ones
 mobbin screens download --patterns Login -c Finance --sort popularity -l 5 -o ./login-refs
 
-# Etape 3 : L'agent peut analyser les images et s'en inspirer
+# Step 3: The agent can analyze the images and draw inspiration from them
 ```
 
 ---
 
-### 2. Audit UX d'un concurrent
+### 2. UX audit of a competitor
 
-Vous voulez analyser l'app d'un concurrent :
+You want to analyze a competitor's app:
 
 ```bash
-# Trouver l'app
+# Find the app
 mobbin apps list -p ios | jq '.[] | select(.appName | test("Revolut"))'
 
-# Voir ses ecrans
+# View its screens
 mobbin screens search -k "Revolut" -l 20
 ```
 
 ---
 
-### 3. Explorer les tendances UI
+### 3. Explore UI trends
 
-Quels patterns sont tendance en ce moment ?
+What patterns are trending right now?
 
 ```bash
-# Ecrans les plus trending
+# Most trending screens
 mobbin screens search --sort trending -l 10
 
-# Patterns d'onboarding tendance
+# Trending onboarding patterns
 mobbin screens search --patterns Onboarding --sort trending -l 10
 
-# Elements UI tendance
+# Trending UI elements
 mobbin screens search --elements "Bottom Sheet" --sort trending
 ```
 
 ---
 
-### 4. Creer un moodboard rapidement
+### 4. Create a moodboard quickly
 
 ```bash
-# Telecharger un mix de references
+# Download a mix of references
 mobbin screens download --patterns "Home" -c Entertainment -l 5 -o ./moodboard
 mobbin screens download --patterns "My Account & Profile" -l 5 -o ./moodboard
 mobbin screens download --elements "Card" -c "AI" -l 5 -o ./moodboard
@@ -67,7 +67,7 @@ mobbin screens download --elements "Card" -c "AI" -l 5 -o ./moodboard
 
 ---
 
-### 5. Script d'export automatise
+### 5. Automated export script
 
 ```typescript
 import { MobbinClient } from "mobbin-sdk";
@@ -102,6 +102,6 @@ for (const pattern of patterns) {
     );
   }
 
-  console.log(`${pattern}: ${result.data.length} ecrans exportes`);
+  console.log(`${pattern}: ${result.data.length} screens exported`);
 }
 ```

@@ -5,12 +5,12 @@ import type { ReactNode } from "react";
 export const metadata = {
 	title: { default: "Mobbin CLI & SDK", template: "%s | Mobbin CLI" },
 	description:
-		"CLI et SDK TypeScript non officiels pour Mobbin — recherchez, explorez et telechargez des references de design UI depuis votre terminal.",
+		"Unofficial TypeScript CLI and SDK for Mobbin — search, explore and download UI design references from your terminal.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
-		<html lang="fr" suppressHydrationWarning>
+		<html lang="en" suppressHydrationWarning>
 			<body className="flex flex-col min-h-screen">
 				<RootProvider>{children}</RootProvider>
 			</body>

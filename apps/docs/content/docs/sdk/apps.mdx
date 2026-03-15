@@ -1,15 +1,15 @@
 ---
 title: Apps
-description: Explorer le catalogue d'applications referencees sur Mobbin.
+description: Explore the catalog of applications referenced on Mobbin.
 ---
 
 ## AppsResource
 
-Explorez les applications indexees par Mobbin.
+Explore the applications indexed by Mobbin.
 
 ### search
 
-Recherche d'apps par categorie. Combine le catalogue et les apps populaires pour filtrer.
+Search for apps by category. Combines the catalog and popular apps for filtering.
 
 ```typescript
 const result = await client.apps.search(
@@ -27,13 +27,13 @@ for (const app of result.data) {
 
 ### list
 
-Retourne le catalogue complet d'une plateforme. C'est la source de verite pour savoir quelles apps sont disponibles.
+Returns the complete catalog for a platform. This is the source of truth for knowing which apps are available.
 
 ```typescript
 const allApps = await client.apps.list("ios");
-console.log(`${allApps.length} apps iOS disponibles`);
+console.log(`${allApps.length} iOS apps available`);
 
-// Filtrer localement
+// Filter locally
 const financeApps = allApps.filter((a) =>
   a.keywords?.includes("finance"),
 );
@@ -41,10 +41,10 @@ const financeApps = allApps.filter((a) =>
 
 ### popular
 
-Apps populaires avec previews, organisees par categorie.
+Popular apps with previews, organized by category.
 
 ```typescript
-const popular = await client.apps.popular("ios", 5); // 5 par categorie
+const popular = await client.apps.popular("ios", 5); // 5 per category
 
 for (const app of popular) {
   console.log(`${app.app_name} (${app.app_category}) — score: ${app.popularity_metric}`);

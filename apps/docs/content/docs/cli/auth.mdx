@@ -1,25 +1,25 @@
 ---
 title: auth
-description: Gestion de l'authentification — connexion, deconnexion et verification du statut.
+description: Authentication management — login, logout, and status check.
 ---
 
 ## mobbin auth
 
-Avant de pouvoir utiliser le CLI, vous devez vous connecter avec votre compte [Mobbin](https://mobbin.com/). Un compte gratuit suffit, mais certaines fonctionnalites peuvent etre limitees selon votre abonnement.
+Before you can use the CLI, you need to log in with your [Mobbin](https://mobbin.com/) account. A free account is sufficient, but some features may be limited depending on your subscription.
 
 ### login
 
-Connectez-vous a votre compte Mobbin.
+Log in to your Mobbin account.
 
-**Mode interactif** (recommande) :
+**Interactive mode** (recommended):
 
 ```bash
 mobbin auth login
 ```
 
-Le CLI vous demandera votre email et mot de passe via des prompts securises.
+The CLI will ask for your email and password via secure prompts.
 
-**Mode non-interactif** (pour les scripts) :
+**Non-interactive mode** (for scripts):
 
 ```bash
 mobbin auth login -e user@example.com -p "votre_mot_de_passe"
@@ -27,16 +27,16 @@ mobbin auth login -e user@example.com -p "votre_mot_de_passe"
 
 | Option | Alias | Description |
 |--------|-------|-------------|
-| `--email` | `-e` | Adresse email du compte Mobbin |
-| `--password` | `-p` | Mot de passe |
+| `--email` | `-e` | Mobbin account email address |
+| `--password` | `-p` | Password |
 
-Vous pouvez aussi utiliser les variables d'environnement `MOBBIN_EMAIL` et `MOBBIN_PASSWORD`.
+You can also use the `MOBBIN_EMAIL` and `MOBBIN_PASSWORD` environment variables.
 
-> La session est stockee dans `~/.config/mobbin/auth.json` avec des permissions restrictives (600). Le token expire apres 1 heure mais est automatiquement rafraichi.
+> The session is stored in `~/.config/mobbin/auth.json` with restrictive permissions (600). The token expires after 1 hour but is automatically refreshed.
 
 ### logout
 
-Supprime la session locale.
+Removes the local session.
 
 ```bash
 mobbin auth logout
@@ -44,13 +44,13 @@ mobbin auth logout
 
 ### status
 
-Verifie si vous etes connecte et affiche les informations de session.
+Checks if you are logged in and displays session information.
 
 ```bash
 mobbin auth status
 ```
 
-**Exemple de sortie :**
+**Example output:**
 
 ```json
 {

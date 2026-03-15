@@ -1,101 +1,101 @@
 ---
 title: screens
-description: Rechercher, telecharger et copier des ecrans de design — le coeur du CLI.
+description: Search, download, and copy design screens — the core of the CLI.
 ---
 
 ## mobbin screens
 
-C'est la commande la plus puissante du CLI. Elle vous permet de chercher parmi des milliers d'ecrans de design, de les telecharger en haute qualite ou de les copier directement dans votre presse-papier.
+This is the most powerful command of the CLI. It lets you search through thousands of design screens, download them in high quality, or copy them directly to your clipboard.
 
 ---
 
 ### search
 
-Recherchez des ecrans avec des filtres precis.
+Search for screens with precise filters.
 
 ```bash
 mobbin screens search [options]
 ```
 
-**Exemples concrets :**
+**Practical examples:**
 
 ```bash
-# Tous les ecrans de login tendance sur iOS
+# All trending login screens on iOS
 mobbin screens search --patterns Login
 
-# Ecrans d'onboarding dans les apps Finance, tries par popularite
+# Onboarding screens in Finance apps, sorted by popularity
 mobbin screens search --patterns Onboarding -c Finance --sort popularity
 
-# Ecrans contenant des Bottom Sheets et des Cards
+# Screens containing Bottom Sheets and Cards
 mobbin screens search --elements "Bottom Sheet,Card"
 
-# Recherche par texte visible dans l'ecran (OCR)
+# Search by visible text on the screen (OCR)
 mobbin screens search -k "Forgot password"
 
-# Ecrans de signup sur Android
+# Signup screens on Android
 mobbin screens search --patterns Signup -p android
 
-# Ecrans animes uniquement
+# Animated screens only
 mobbin screens search --patterns Home --animation
 
-# Combiner plusieurs filtres
+# Combine multiple filters
 mobbin screens search --patterns Checkout -c Shopping -p ios --sort popularity -l 10 -t
 ```
 
-**Options :**
+**Options:**
 
-| Option | Alias | Description | Defaut |
-|--------|-------|-------------|--------|
+| Option | Alias | Description | Default |
+|--------|-------|-------------|---------|
 | `--platform` | `-p` | `ios`, `android`, `web` | `ios` |
-| `--patterns` | | Patterns d'ecran (virgules) | — |
-| `--elements` | | Elements UI (virgules) | — |
-| `--keywords` | `-k` | Texte visible dans les screenshots | — |
-| `--categories` | `-c` | Categories d'app (virgules) | — |
-| `--animation` | | Ecrans animes uniquement | `false` |
+| `--patterns` | | Screen patterns (comma-separated) | — |
+| `--elements` | | UI elements (comma-separated) | — |
+| `--keywords` | `-k` | Visible text in screenshots | — |
+| `--categories` | `-c` | App categories (comma-separated) | — |
+| `--animation` | | Animated screens only | `false` |
 | `--sort` | `-s` | `trending`, `publishedAt`, `popularity` | `trending` |
-| `--limit` | `-l` | Nombre de resultats | `24` |
-| `--table` | `-t` | Affichage en tableau | `false` |
+| `--limit` | `-l` | Number of results | `24` |
+| `--table` | `-t` | Table display | `false` |
 
-**Patterns populaires :** Login, Signup, Home, Checkout, Settings, Notifications, Onboarding, Search, My Account & Profile, Subscription & Paywall, Filter & Sort, Guided Tour & Tutorial.
+**Popular patterns:** Login, Signup, Home, Checkout, Settings, Notifications, Onboarding, Search, My Account & Profile, Subscription & Paywall, Filter & Sort, Guided Tour & Tutorial.
 
-**Elements UI populaires :** Banner, Bottom Sheet, Button, Card, Chip, Dialog, Divider, Stacked List, Tab Bar, Text Field, Toast.
+**Popular UI elements:** Banner, Bottom Sheet, Button, Card, Chip, Dialog, Divider, Stacked List, Tab Bar, Text Field, Toast.
 
-> Utilisez `mobbin filters list -c screenPatterns -t` pour voir la liste complete des 110+ patterns disponibles.
+> Use `mobbin filters list -c screenPatterns -t` to see the complete list of 110+ available patterns.
 
 ---
 
 ### download
 
-Telechargez des images d'ecrans en haute qualite (format WebP).
+Download high-quality screen images (WebP format).
 
 ```bash
 mobbin screens download [options]
 ```
 
-**Exemples :**
+**Examples:**
 
 ```bash
-# Telecharger 5 ecrans de signup dans le dossier courant
+# Download 5 signup screens into the current directory
 mobbin screens download --patterns Signup -l 5
 
-# Telecharger dans un dossier specifique
+# Download into a specific folder
 mobbin screens download --patterns Checkout -c Shopping -o ./checkout-refs
 
-# Telecharger des references pour le web
+# Download web references
 mobbin screens download -p web --patterns "Landing Page" -l 10 -o ./web-refs
 ```
 
-Les fichiers sont nommes `{app_name}_{id}.webp`. Exemple : `netflix_fba27ddb.webp`.
+Files are named `{app_name}_{id}.webp`. Example: `netflix_fba27ddb.webp`.
 
-**Options specifiques :**
+**Specific options:**
 
-| Option | Alias | Description | Defaut |
-|--------|-------|-------------|--------|
-| `--output` | `-o` | Repertoire de destination | `.` (courant) |
+| Option | Alias | Description | Default |
+|--------|-------|-------------|---------|
+| `--output` | `-o` | Destination directory | `.` (current) |
 
-Toutes les options de `search` sont aussi disponibles.
+All `search` options are also available.
 
-**Sortie :**
+**Output:**
 
 ```json
 {
@@ -113,33 +113,33 @@ Toutes les options de `search` sont aussi disponibles.
 
 ### copy
 
-Copie un ecran directement dans le presse-papier. Parfait pour coller une reference dans Figma, Slack, un email, etc.
+Copies a screen directly to the clipboard. Perfect for pasting a reference into Figma, Slack, an email, etc.
 
 ```bash
 mobbin screens copy [options]
 ```
 
-**Exemples :**
+**Examples:**
 
 ```bash
-# Copier le premier ecran de login tendance
+# Copy the first trending login screen
 mobbin screens copy --patterns Login
 
-# Copier le 3e resultat
+# Copy the 3rd result
 mobbin screens copy --patterns Login -i 2
 
-# Copier un ecran de paywall dans les apps Entertainment
+# Copy a paywall screen from Entertainment apps
 mobbin screens copy --patterns "Subscription & Paywall" -c Entertainment
 ```
 
-| Option | Alias | Description | Defaut |
-|--------|-------|-------------|--------|
-| `--index` | `-i` | Index du resultat a copier (0-based) | `0` |
+| Option | Alias | Description | Default |
+|--------|-------|-------------|---------|
+| `--index` | `-i` | Index of the result to copy (0-based) | `0` |
 
-**Compatibilite :**
+**Compatibility:**
 
-| OS | Methode |
-|----|---------|
+| OS | Method |
+|----|--------|
 | macOS | `sips` + `osascript` |
-| Linux | `xclip` ou `wl-copy` (Wayland) |
+| Linux | `xclip` or `wl-copy` (Wayland) |
 | Windows | PowerShell `Clipboard` |

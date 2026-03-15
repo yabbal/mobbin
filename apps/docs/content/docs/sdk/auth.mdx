@@ -1,52 +1,52 @@
 ---
 title: Auth
-description: Authentification — login, refresh token et gestion de session.
+description: Authentication — login, refresh token, and session management.
 ---
 
 ## AuthResource
 
-La ressource `auth` gere la connexion a Mobbin via Supabase Auth.
+The `auth` resource handles the connection to Mobbin via Supabase Auth.
 
 ### checkEmail
 
-Verifie la methode d'authentification disponible pour un email. Certains comptes utilisent un mot de passe, d'autres un lien magique.
+Checks the authentication method available for an email. Some accounts use a password, others use a magic link.
 
 ```typescript
 const type = await client.auth.checkEmail("user@example.com");
 // "password" | "magic_link"
 
 if (type === "magic_link") {
-  console.log("Ce compte utilise un lien magique (non supporte par le SDK)");
+  console.log("This account uses a magic link (not supported by the SDK)");
 }
 ```
 
 ### login
 
-Connecte l'utilisateur et retourne une session Supabase complete.
+Logs in the user and returns a complete Supabase session.
 
 ```typescript
 const session = await client.auth.login("user@example.com", "password");
 
 console.log(session.access_token); // JWT token
-console.log(session.expires_at);   // Timestamp d'expiration (secondes)
-console.log(session.user.id);      // UUID utilisateur
+console.log(session.expires_at);   // Expiration timestamp (seconds)
+console.log(session.user.id);      // User UUID
 console.log(session.user.email);   // Email
 ```
 
-La session contient un `access_token` (JWT, expire apres 1h) et un `refresh_token` (longue duree).
+The session contains an `access_token` (JWT, expires after 1h) and a `refresh_token` (long-lived).
 
 ### refresh
 
-Rafraichit la session avec le refresh token.
+Refreshes the session with the refresh token.
 
 ```typescript
 const newSession = await client.auth.refresh(session.refresh_token);
-// Nouvelle session avec un nouveau access_token
+// New session with a new access_token
 ```
 
 ### getUser
 
-Recupere les informations de l'utilisateur connecte.
+Retrieves the information of the logged-in user.
 
 ```typescript
 const user = await client.auth.getUser();

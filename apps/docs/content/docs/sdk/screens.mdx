@@ -1,67 +1,67 @@
 ---
 title: Screens
-description: Rechercher et telecharger des ecrans de design.
+description: Search and download design screens.
 ---
 
 ## ScreensResource
 
-La ressource la plus importante du SDK. Elle permet de rechercher parmi des milliers d'ecrans et de les telecharger.
+The most important resource of the SDK. It allows you to search through thousands of screens and download them.
 
 ### search
 
-Recherche des ecrans avec des filtres precis.
+Search for screens with precise filters.
 
 ```typescript
 const result = await client.screens.search(
   {
     platform: "ios",              // "ios" | "android" | "web"
-    screenPatterns: ["Login"],    // null pour ignorer
+    screenPatterns: ["Login"],    // null to ignore
     screenElements: null,         // ["Button", "Card"] etc.
-    screenKeywords: null,         // Recherche OCR
-    appCategories: ["Finance"],   // null pour toutes
-    hasAnimation: null,           // true pour les ecrans animes
+    screenKeywords: null,         // OCR search
+    appCategories: ["Finance"],   // null for all
+    hasAnimation: null,           // true for animated screens
   },
   {
-    pageSize: 10,                 // Nombre de resultats
+    pageSize: 10,                 // Number of results
     sortBy: "trending",           // "trending" | "publishedAt" | "popularity"
   },
 );
 ```
 
-**Reponse :**
+**Response:**
 
 ```typescript
 result.data // Screen[]
 ```
 
-Chaque `Screen` contient :
+Each `Screen` contains:
 
-| Champ | Type | Description |
+| Field | Type | Description |
 |-------|------|-------------|
-| `id` | `string` | Identifiant unique |
-| `appName` | `string` | Nom de l'application |
-| `appCategory` | `string` | Categorie de l'app |
-| `screenPatterns` | `string[]` | Patterns detectes (Login, Signup...) |
-| `screenElements` | `string[]` | Elements UI detectes |
-| `screenKeywords` | `string[]` | Texte visible (OCR) |
-| `platform` | `Platform` | ios, android ou web |
-| `metadata` | `{ width, height }` | Dimensions de l'image |
-| `screenUrl` | `string` | URL Supabase Storage |
-| `screenCdnImgSources` | `{ src, srcSet }` | URLs CDN optimisees |
+| `id` | `string` | Unique identifier |
+| `appName` | `string` | Application name |
+| `appCategory` | `string` | App category |
+| `screenPatterns` | `string[]` | Detected patterns (Login, Signup...) |
+| `screenElements` | `string[]` | Detected UI elements |
+| `screenKeywords` | `string[]` | Visible text (OCR) |
+| `platform` | `Platform` | ios, android, or web |
+| `metadata` | `{ width, height }` | Image dimensions |
+| `screenUrl` | `string` | Supabase Storage URL |
+| `screenCdnImgSources` | `{ src, srcSet }` | Optimized CDN URLs |
 
 ### download
 
-Telecharge une image d'ecran via son URL CDN.
+Downloads a screen image via its CDN URL.
 
 ```typescript
-// Utiliser le src du CDN (recommande)
+// Use the CDN src (recommended)
 const buffer = await client.screens.download(
   screen.screenCdnImgSources.src,
 );
 
-// Sauvegarder en fichier
+// Save to file
 import { writeFile } from "node:fs/promises";
 await writeFile("screen.webp", Buffer.from(buffer));
 ```
 
-Les images sont en format **WebP** pour une taille optimale avec une excellente qualite.
+Images are in **WebP** format for optimal size with excellent quality.

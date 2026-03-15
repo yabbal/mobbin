@@ -1,11 +1,11 @@
 ---
 title: Filters
-description: Dictionnaire complet des filtres disponibles pour la recherche.
+description: Complete dictionary of available filters for search.
 ---
 
 ## FiltersResource
 
-Le dictionnaire de filtres contient toutes les valeurs possibles pour les recherches. C'est utile pour construire des interfaces de recherche ou pour decouvrir les options disponibles.
+The filter dictionary contains all possible values for searches. This is useful for building search interfaces or discovering available options.
 
 ### list
 
@@ -21,22 +21,22 @@ for (const cat of categories) {
 }
 ```
 
-**Structure de reponse :**
+**Response structure:**
 
 ```typescript
 interface DictionaryCategory {
   slug: string;           // "screenPatterns", "screenElements", etc.
-  displayName: string;    // Nom lisible
+  displayName: string;    // Human-readable name
   experience: "web" | "mobile";
   subCategories: {
     displayName: string;
     entries: {
-      displayName: string; // Ex: "Login"
-      definition: string;  // Description du pattern
-      synonyms: string[];  // Termes alternatifs
+      displayName: string; // E.g.: "Login"
+      definition: string;  // Pattern description
+      synonyms: string[];  // Alternative terms
     }[];
   }[];
 }
 ```
 
-Chaque entree a une `definition` qui explique le pattern, et des `synonyms` pour aider a la recherche.
+Each entry has a `definition` that explains the pattern, and `synonyms` to help with search.

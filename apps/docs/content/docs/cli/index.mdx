@@ -1,0 +1,28 @@
+---
+title: CLI
+description: Reference des commandes du CLI Mobbin
+---
+
+## mobbin-cli
+
+Le CLI Mobbin permet de rechercher, explorer et telecharger des references de design UI directement depuis le terminal.
+
+### Installation
+
+```bash
+pnpm add -g mobbin-cli
+```
+
+### Commandes
+
+| Commande | Description |
+|----------|-------------|
+| `mobbin auth` | Gestion de l'authentification |
+| `mobbin screens` | Recherche et telechargement d'ecrans |
+| `mobbin apps` | Recherche et navigation d'apps |
+| `mobbin filters` | Exploration des filtres disponibles |
+| `mobbin collections` | Gestion des collections |
+
+### Sortie
+
+Toutes les commandes produisent du **JSON** par defaut (ideal pour l'integration IA/scripts). Utilisez `--table` ou `-t` pour un affichage en tableau.

@@ -1,0 +1,33 @@
+---
+title: Apps
+description: Recherche et liste d'apps
+---
+
+## AppsResource
+
+### search
+
+```typescript
+const result = await client.apps.search(
+  { platform: "ios", appCategories: ["Finance"] },
+  { pageSize: 10 },
+);
+```
+
+### list
+
+Catalogue complet d'une plateforme.
+
+```typescript
+const apps = await client.apps.list("ios");
+// SearchableApp[]
+```
+
+### popular
+
+Apps populaires avec previews.
+
+```typescript
+const popular = await client.apps.popular("ios", 10);
+// PopularApp[]
+```

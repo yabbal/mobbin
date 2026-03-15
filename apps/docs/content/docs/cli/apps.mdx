@@ -1,0 +1,36 @@
+---
+title: apps
+description: Recherche et navigation d'apps
+---
+
+## mobbin apps
+
+### search
+
+```bash
+mobbin apps search -c Finance -l 10
+```
+
+### list
+
+Lister toutes les apps disponibles pour une plateforme.
+
+```bash
+mobbin apps list -p ios
+mobbin apps list -p web
+```
+
+### popular
+
+Apps populaires par categorie.
+
+```bash
+mobbin apps popular -p ios -t
+```
+
+| Option | Description |
+|--------|-------------|
+| `-p, --platform` | `ios` (defaut), `android`, `web` |
+| `-c, --categories` | Categories (virgules) |
+| `-l, --limit` | Nombre de resultats |
+| `-t, --table` | Affichage en tableau |

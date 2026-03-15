@@ -1,0 +1,35 @@
+---
+title: Auth
+description: Authentification SDK
+---
+
+## AuthResource
+
+### checkEmail
+
+Verifie la methode d'authentification d'un email.
+
+```typescript
+const type = await client.auth.checkEmail("user@example.com");
+// "password" | "magic_link"
+```
+
+### login
+
+```typescript
+const session = await client.auth.login("user@example.com", "password");
+// { access_token, refresh_token, expires_at, user }
+```
+
+### refresh
+
+```typescript
+const newSession = await client.auth.refresh(session.refresh_token);
+```
+
+### getUser
+
+```typescript
+const user = await client.auth.getUser();
+// { id, email, ... }
+```

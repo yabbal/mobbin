@@ -1,0 +1,72 @@
+---
+title: screens
+description: Recherche et telechargement d'ecrans
+---
+
+## mobbin screens
+
+### search
+
+Rechercher des ecrans par patterns, elements UI, mots-cles ou categories.
+
+```bash
+# Par pattern
+mobbin screens search --patterns Login
+mobbin screens search --patterns "Signup,Onboarding"
+
+# Par element UI
+mobbin screens search --elements "Button,Card"
+
+# Par texte visible (OCR)
+mobbin screens search -k "Sign up"
+
+# Par categorie d'app
+mobbin screens search -c Finance
+
+# Combiner les filtres
+mobbin screens search --patterns Checkout -c Shopping -p ios --sort popularity -l 10
+```
+
+| Option | Description |
+|--------|-------------|
+| `-p, --platform` | `ios` (defaut), `android`, `web` |
+| `--patterns` | Patterns d'ecran (virgules) |
+| `--elements` | Elements UI (virgules) |
+| `-k, --keywords` | Recherche texte OCR |
+| `-c, --categories` | Categories d'app (virgules) |
+| `--animation` | Filtrer les ecrans animes |
+| `-s, --sort` | `trending` (defaut), `publishedAt`, `popularity` |
+| `-l, --limit` | Nombre de resultats (defaut: 24) |
+| `-t, --table` | Affichage en tableau |
+
+### download
+
+Telecharger des images d'ecrans.
+
+```bash
+mobbin screens download --patterns Signup -l 5 -o ./refs
+```
+
+| Option | Description |
+|--------|-------------|
+| `-o, --output` | Repertoire de sortie (defaut: `.`) |
+| Autres | Memes filtres que `search` |
+
+### copy
+
+Copier un ecran dans le presse-papier.
+
+```bash
+# Premier resultat
+mobbin screens copy --patterns Login
+
+# Choisir un index
+mobbin screens copy --patterns Login -i 2
+```
+
+| Option | Description |
+|--------|-------------|
+| `-i, --index` | Index du resultat (defaut: 0) |
+| Autres | Memes filtres que `search` |
+
+Supporte macOS (`osascript`), Linux (`xclip`/`wl-copy`), et Windows (`PowerShell`).

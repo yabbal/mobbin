@@ -1,0 +1,31 @@
+{
+	"name": "mobbin-sdk",
+	"version": "0.1.0",
+	"description": "Unofficial TypeScript SDK for the Mobbin API",
+	"author": "yabbal",
+	"license": "MIT",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"files": ["dist", "README.md", "LICENSE"],
+	"publishConfig": {
+		"provenance": true,
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"lint": "biome check src/",
+		"check": "tsc --noEmit",
+		"clean": "rm -rf dist .turbo",
+		"prepublishOnly": "pnpm build"
+	},
+	"devDependencies": {
+		"@types/node": "^22.15.3",
+		"tsup": "^8.4.0"
+	}
+}

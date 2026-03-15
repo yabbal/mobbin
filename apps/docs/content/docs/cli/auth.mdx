@@ -1,0 +1,39 @@
+---
+title: auth
+description: Commandes d'authentification
+---
+
+## mobbin auth
+
+Gestion de la session d'authentification Mobbin.
+
+### login
+
+```bash
+# Interactif
+mobbin auth login
+
+# Non-interactif
+mobbin auth login -e user@example.com -p password
+```
+
+| Option | Description |
+|--------|-------------|
+| `-e, --email` | Adresse email |
+| `-p, --password` | Mot de passe |
+
+La session est stockee dans `~/.config/mobbin/auth.json`.
+
+### logout
+
+```bash
+mobbin auth logout
+```
+
+### status
+
+```bash
+mobbin auth status
+```
+
+Retourne le statut d'authentification, l'email, et la date d'expiration du token.

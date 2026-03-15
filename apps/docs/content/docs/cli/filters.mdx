@@ -1,0 +1,26 @@
+---
+title: filters
+description: Exploration des filtres disponibles
+---
+
+## mobbin filters
+
+### list
+
+Lister les categories de filtres et leurs valeurs.
+
+```bash
+# Toutes les categories
+mobbin filters list
+
+# Valeurs d'une categorie
+mobbin filters list -c screenPatterns
+mobbin filters list -c screenElements
+mobbin filters list -c appCategories
+mobbin filters list -c flowActions
+```
+
+| Option | Description |
+|--------|-------------|
+| `-c, --category` | Slug de la categorie |
+| `-t, --table` | Affichage en tableau |

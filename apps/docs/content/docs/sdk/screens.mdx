@@ -1,0 +1,36 @@
+---
+title: Screens
+description: Recherche et telechargement d'ecrans
+---
+
+## ScreensResource
+
+### search
+
+```typescript
+const result = await client.screens.search(
+  {
+    platform: "ios",
+    screenPatterns: ["Login", "Signup"],
+    screenElements: null,
+    screenKeywords: null,
+    appCategories: ["Finance"],
+    hasAnimation: null,
+  },
+  { pageSize: 10, sortBy: "trending" },
+);
+// { data: Screen[], searchRequestId: string }
+```
+
+### download
+
+Telecharge une image d'ecran via son URL CDN.
+
+```typescript
+const buffer = await client.screens.download(
+  result.data[0].screenCdnImgSources.src,
+);
+
+import { writeFile } from "node:fs/promises";
+await writeFile("screen.webp", Buffer.from(buffer));
+```

@@ -1,0 +1,38 @@
+---
+title: SDK
+description: Reference du SDK TypeScript Mobbin
+---
+
+## mobbin-sdk
+
+SDK TypeScript pour l'API Mobbin. Zero dependance runtime — utilise `fetch` natif.
+
+### Installation
+
+```bash
+pnpm add mobbin-sdk
+```
+
+### Usage
+
+```typescript
+import { MobbinClient } from "mobbin-sdk";
+
+const client = new MobbinClient({
+  credentials: { email: "user@example.com", password: "..." },
+});
+await client.init();
+```
+
+### Resources
+
+Le client expose les resources suivantes :
+
+| Resource | Description |
+|----------|-------------|
+| `client.auth` | Authentification (login, refresh, getUser) |
+| `client.screens` | Recherche et telechargement d'ecrans |
+| `client.apps` | Recherche et liste d'apps |
+| `client.filters` | Categories de filtres |
+| `client.collections` | Collections utilisateur |
+| `client.search` | Recherche globale (trending, etc.) |

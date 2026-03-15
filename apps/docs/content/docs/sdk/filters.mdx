@@ -1,0 +1,17 @@
+---
+title: Filters
+description: Categories de filtres
+---
+
+## FiltersResource
+
+### list
+
+```typescript
+const categories = await client.filters.list();
+// DictionaryCategory[]
+```
+
+Chaque categorie contient des sous-categories avec des entrees (`displayName`, `definition`, `synonyms`, etc.).
+
+Categories disponibles : `screenPatterns`, `screenElements`, `appCategories`, `flowActions`, `styles`.

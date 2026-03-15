@@ -1,6 +1,6 @@
 {
 	"name": "mobbin-sdk",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Unofficial TypeScript SDK for the Mobbin API",
 	"author": "yabbal",
 	"license": "MIT",

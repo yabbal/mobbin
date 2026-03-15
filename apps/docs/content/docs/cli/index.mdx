@@ -37,6 +37,7 @@ mobbin screens search --patterns Login -l 5
 | [`mobbin apps`](/docs/cli/apps) | Explore the application catalog |
 | [`mobbin filters`](/docs/cli/filters) | Discover available filters |
 | [`mobbin collections`](/docs/cli/collections) | Manage your saved collections |
+| `mobbin completion` | Generate shell completion script |
 | `mobbin version` | Display the CLI version |
 
 ### Output format
@@ -67,3 +68,18 @@ Most search commands share these options:
 | `--sort` | `-s` | Sort results | `trending` (default), `publishedAt`, `popularity` |
 | `--limit` | `-l` | Number of results | Number (default: 24) |
 | `--table` | `-t` | Table display | Flag |
+
+### Shell completion
+
+Enable autocompletion for commands, subcommands, and flags:
+
+```bash
+# zsh (add to ~/.zshrc)
+eval "$(mobbin completion --shell zsh)"
+
+# bash (add to ~/.bashrc)
+eval "$(mobbin completion --shell bash)"
+
+# fish
+mobbin completion --shell fish | source
+```

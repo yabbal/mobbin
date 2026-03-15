@@ -1,17 +1,42 @@
 ---
 title: Filters
-description: Categories de filtres
+description: Dictionnaire complet des filtres disponibles pour la recherche.
 ---
 
 ## FiltersResource
+
+Le dictionnaire de filtres contient toutes les valeurs possibles pour les recherches. C'est utile pour construire des interfaces de recherche ou pour decouvrir les options disponibles.
 
 ### list
 
 ```typescript
 const categories = await client.filters.list();
-// DictionaryCategory[]
+
+for (const cat of categories) {
+  console.log(`\n${cat.displayName} (${cat.slug}):`);
+  for (const sub of cat.subCategories) {
+    const names = sub.entries.map((e) => e.displayName);
+    console.log(`  ${sub.displayName}: ${names.join(", ")}`);
+  }
+}
 ```
 
-Chaque categorie contient des sous-categories avec des entrees (`displayName`, `definition`, `synonyms`, etc.).
+**Structure de reponse :**
 
-Categories disponibles : `screenPatterns`, `screenElements`, `appCategories`, `flowActions`, `styles`.
+```typescript
+interface DictionaryCategory {
+  slug: string;           // "screenPatterns", "screenElements", etc.
+  displayName: string;    // Nom lisible
+  experience: "web" | "mobile";
+  subCategories: {
+    displayName: string;
+    entries: {
+      displayName: string; // Ex: "Login"
+      definition: string;  // Description du pattern
+      synonyms: string[];  // Termes alternatifs
+    }[];
+  }[];
+}
+```
+
+Chaque entree a une `definition` qui explique le pattern, et des `synonyms` pour aider a la recherche.

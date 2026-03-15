@@ -1,11 +1,11 @@
 ---
 title: CLI
-description: Reference des commandes du CLI Mobbin
+description: Guide complet du CLI Mobbin — recherchez, telechargez et explorez des designs UI depuis votre terminal.
 ---
 
 ## mobbin-cli
 
-Le CLI Mobbin permet de rechercher, explorer et telecharger des references de design UI directement depuis le terminal.
+Le CLI Mobbin transforme votre terminal en outil de recherche de design. Il se connecte a l'API Mobbin pour vous donner acces a des milliers de references UI sans quitter votre workflow.
 
 ### Installation
 
@@ -13,16 +13,57 @@ Le CLI Mobbin permet de rechercher, explorer et telecharger des references de de
 pnpm add -g mobbin-cli
 ```
 
-### Commandes
+Apres installation, la commande `mobbin` est disponible globalement.
+
+### Premiere utilisation
+
+```bash
+# Verifier l'installation
+mobbin version
+
+# Se connecter
+mobbin auth login
+
+# Lancer votre premiere recherche
+mobbin screens search --patterns Login -l 5
+```
+
+### Commandes disponibles
 
 | Commande | Description |
 |----------|-------------|
-| `mobbin auth` | Gestion de l'authentification |
-| `mobbin screens` | Recherche et telechargement d'ecrans |
-| `mobbin apps` | Recherche et navigation d'apps |
-| `mobbin filters` | Exploration des filtres disponibles |
-| `mobbin collections` | Gestion des collections |
+| [`mobbin auth`](/docs/cli/auth) | Se connecter, se deconnecter, verifier le statut |
+| [`mobbin screens`](/docs/cli/screens) | Rechercher, telecharger et copier des ecrans |
+| [`mobbin apps`](/docs/cli/apps) | Explorer le catalogue d'applications |
+| [`mobbin filters`](/docs/cli/filters) | Decouvrir les filtres disponibles |
+| [`mobbin collections`](/docs/cli/collections) | Gerer vos collections sauvegardees |
+| `mobbin version` | Afficher la version du CLI |
 
-### Sortie
+### Format de sortie
 
-Toutes les commandes produisent du **JSON** par defaut (ideal pour l'integration IA/scripts). Utilisez `--table` ou `-t` pour un affichage en tableau.
+Par defaut, toutes les commandes produisent du **JSON** sur `stdout`. C'est ideal pour :
+
+- Le piping vers `jq` ou d'autres outils
+- L'integration avec des agents IA (Claude Code, etc.)
+- L'automatisation dans des scripts
+
+Pour un affichage humain en tableau, ajoutez `--table` ou `-t` :
+
+```bash
+# JSON (defaut)
+mobbin apps popular | jq '.[0:3] | .[].app_name'
+
+# Tableau
+mobbin apps popular -t
+```
+
+### Filtres globaux
+
+La plupart des commandes de recherche partagent ces options :
+
+| Option | Alias | Description | Valeurs |
+|--------|-------|-------------|---------|
+| `--platform` | `-p` | Plateforme cible | `ios` (defaut), `android`, `web` |
+| `--sort` | `-s` | Tri des resultats | `trending` (defaut), `publishedAt`, `popularity` |
+| `--limit` | `-l` | Nombre de resultats | Nombre (defaut: 24) |
+| `--table` | `-t` | Affichage en tableau | Flag |

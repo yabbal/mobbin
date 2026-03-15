@@ -1,36 +1,67 @@
 ---
 title: Screens
-description: Recherche et telechargement d'ecrans
+description: Rechercher et telecharger des ecrans de design.
 ---
 
 ## ScreensResource
 
+La ressource la plus importante du SDK. Elle permet de rechercher parmi des milliers d'ecrans et de les telecharger.
+
 ### search
+
+Recherche des ecrans avec des filtres precis.
 
 ```typescript
 const result = await client.screens.search(
   {
-    platform: "ios",
-    screenPatterns: ["Login", "Signup"],
-    screenElements: null,
-    screenKeywords: null,
-    appCategories: ["Finance"],
-    hasAnimation: null,
+    platform: "ios",              // "ios" | "android" | "web"
+    screenPatterns: ["Login"],    // null pour ignorer
+    screenElements: null,         // ["Button", "Card"] etc.
+    screenKeywords: null,         // Recherche OCR
+    appCategories: ["Finance"],   // null pour toutes
+    hasAnimation: null,           // true pour les ecrans animes
   },
-  { pageSize: 10, sortBy: "trending" },
+  {
+    pageSize: 10,                 // Nombre de resultats
+    sortBy: "trending",           // "trending" | "publishedAt" | "popularity"
+  },
 );
-// { data: Screen[], searchRequestId: string }
 ```
+
+**Reponse :**
+
+```typescript
+result.data // Screen[]
+```
+
+Chaque `Screen` contient :
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Identifiant unique |
+| `appName` | `string` | Nom de l'application |
+| `appCategory` | `string` | Categorie de l'app |
+| `screenPatterns` | `string[]` | Patterns detectes (Login, Signup...) |
+| `screenElements` | `string[]` | Elements UI detectes |
+| `screenKeywords` | `string[]` | Texte visible (OCR) |
+| `platform` | `Platform` | ios, android ou web |
+| `metadata` | `{ width, height }` | Dimensions de l'image |
+| `screenUrl` | `string` | URL Supabase Storage |
+| `screenCdnImgSources` | `{ src, srcSet }` | URLs CDN optimisees |
 
 ### download
 
 Telecharge une image d'ecran via son URL CDN.
 
 ```typescript
+// Utiliser le src du CDN (recommande)
 const buffer = await client.screens.download(
-  result.data[0].screenCdnImgSources.src,
+  screen.screenCdnImgSources.src,
 );
 
+// Sauvegarder en fichier
 import { writeFile } from "node:fs/promises";
 await writeFile("screen.webp", Buffer.from(buffer));
 ```
+
+Les images sont en format **WebP** pour une taille optimale avec une excellente qualite.

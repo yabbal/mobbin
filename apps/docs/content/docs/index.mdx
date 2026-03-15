@@ -1,44 +1,101 @@
 ---
 title: Introduction
-description: CLI et SDK TypeScript non officiels pour Mobbin
+description: CLI et SDK TypeScript non officiels pour rechercher et telecharger des references de design UI depuis Mobbin.
 ---
 
-## Mobbin CLI & SDK
+## Qu'est-ce que Mobbin CLI & SDK ?
 
-Outils non officiels pour interagir avec [Mobbin](https://mobbin.com/) depuis le terminal ou depuis du code TypeScript.
+[Mobbin](https://mobbin.com/) est une plateforme de reference pour le design UI/UX. Elle catalogue des milliers d'ecrans d'applications mobiles et web, organises par patterns, elements UI et categories.
 
-### Installation
+**Mobbin CLI & SDK** sont des outils non officiels qui vous permettent d'acceder a tout ce contenu **directement depuis votre terminal ou votre code TypeScript**, sans passer par le navigateur.
 
-**CLI (global) :**
+### A qui s'adresse cet outil ?
+
+- **Designers** qui veulent rapidement telecharger des references pour un projet
+- **Developpeurs** qui implementent des interfaces et cherchent de l'inspiration
+- **Agents IA** (Claude Code, etc.) qui ont besoin d'acceder a des references visuelles programmatiquement
+- **Equipes produit** qui veulent analyser les patterns UI de leurs concurrents
+
+### Ce que vous pouvez faire
+
+- **Rechercher** des ecrans par pattern (Login, Signup, Checkout, Onboarding...), par element UI (Button, Card, Dialog...), par categorie d'app (Finance, Shopping...) ou par texte visible dans les screenshots (OCR)
+- **Telecharger** des images d'ecrans en haute qualite
+- **Copier** un ecran directement dans votre presse-papier
+- **Explorer** le catalogue de 800+ apps sur iOS, Android et Web
+- **Lister** les filtres disponibles pour affiner vos recherches
+
+---
+
+## Installation
+
+**CLI** — pour une utilisation en ligne de commande :
 
 ```bash
 pnpm add -g mobbin-cli
 ```
 
-**SDK (dans un projet) :**
+**SDK** — pour une utilisation dans du code TypeScript :
 
 ```bash
 pnpm add mobbin-sdk
 ```
 
-### Demarrage rapide
+---
+
+## Demarrage rapide
+
+### 1. Connectez-vous a votre compte Mobbin
 
 ```bash
-# Se connecter
 mobbin auth login
-
-# Rechercher des ecrans de login
-mobbin screens search --patterns Login
-
-# Telecharger des references de design
-mobbin screens download --patterns Signup -l 5 -o ./refs
-
-# Copier un ecran dans le presse-papier
-mobbin screens copy --patterns Checkout
 ```
 
-### Plateformes supportees
+Le CLI vous demandera votre email et mot de passe. La session est stockee localement dans `~/.config/mobbin/auth.json`.
 
-- **iOS** — Applications mobiles iPhone/iPad
-- **Android** — Applications mobiles Android
-- **Web** — Sites et applications web
+### 2. Recherchez des ecrans
+
+```bash
+# Ecrans de login des apps iOS
+mobbin screens search --patterns Login
+
+# Ecrans de checkout dans les apps Shopping, tries par popularite
+mobbin screens search --patterns Checkout -c Shopping --sort popularity
+
+# Ecrans avec des Bottom Sheets
+mobbin screens search --elements "Bottom Sheet" -l 10
+```
+
+### 3. Telechargez des references
+
+```bash
+# Telecharger 5 ecrans de signup dans un dossier
+mobbin screens download --patterns Signup -l 5 -o ./design-refs
+```
+
+### 4. Copiez dans le presse-papier
+
+```bash
+# Copie le premier resultat directement
+mobbin screens copy --patterns "Subscription & Paywall"
+```
+
+---
+
+## Plateformes supportees
+
+| Plateforme | Description | Nombre d'apps |
+|-----------|-------------|---------------|
+| **iOS** | Applications iPhone/iPad | 800+ |
+| **Android** | Applications Android | 200+ |
+| **Web** | Sites et applications web | 100+ |
+
+---
+
+## Deux packages, un ecosysteme
+
+| Package | Description | Quand l'utiliser |
+|---------|-------------|-----------------|
+| [**mobbin-cli**](/docs/cli) | Interface en ligne de commande | Recherche rapide, telechargement, integration dans des scripts |
+| [**mobbin-sdk**](/docs/sdk) | SDK TypeScript | Integration dans vos applications, agents IA, automatisation |
+
+Le CLI utilise le SDK en interne. Les deux packages sont publies sur npm avec provenance OIDC.

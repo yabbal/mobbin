@@ -1,11 +1,18 @@
 ---
 title: SDK
-description: Reference du SDK TypeScript Mobbin
+description: SDK TypeScript pour l'API Mobbin — zero dependance, utilise fetch natif.
 ---
 
 ## mobbin-sdk
 
-SDK TypeScript pour l'API Mobbin. Zero dependance runtime — utilise `fetch` natif.
+Le SDK TypeScript vous permet d'integrer Mobbin dans vos applications, scripts ou agents IA. Il est concu pour etre leger et simple d'utilisation.
+
+### Caracteristiques
+
+- **Zero dependance runtime** — utilise `fetch` natif (Node.js 18+)
+- **TypeScript first** — types complets pour toutes les reponses API
+- **Gestion automatique des sessions** — refresh token automatique
+- **Auth via cookies Supabase** — compatible avec l'API Mobbin
 
 ### Installation
 
@@ -13,26 +20,76 @@ SDK TypeScript pour l'API Mobbin. Zero dependance runtime — utilise `fetch` na
 pnpm add mobbin-sdk
 ```
 
-### Usage
+### Initialisation
 
 ```typescript
 import { MobbinClient } from "mobbin-sdk";
+
+// Option 1 : Login avec credentials
+const client = new MobbinClient({
+  credentials: { email: "user@example.com", password: "..." },
+});
+await client.init(); // Se connecte automatiquement
+
+// Option 2 : Session existante (depuis un fichier, un store, etc.)
+const client = new MobbinClient({ session: savedSession });
+await client.init();
+
+// Option 3 : Client sans auth (pour les endpoints publics)
+const client = new MobbinClient();
+```
+
+### Ressources disponibles
+
+| Ressource | Methodes | Description |
+|-----------|----------|-------------|
+| [`client.auth`](/docs/sdk/auth) | `checkEmail`, `login`, `refresh`, `getUser` | Authentification |
+| [`client.screens`](/docs/sdk/screens) | `search`, `download` | Ecrans de design |
+| [`client.apps`](/docs/sdk/apps) | `search`, `list`, `popular` | Catalogue d'apps |
+| [`client.filters`](/docs/sdk/filters) | `list` | Dictionnaire de filtres |
+| [`client.collections`](/docs/sdk/collections) | `list` | Collections utilisateur |
+
+### Types principaux
+
+```typescript
+import type {
+  Platform,        // "ios" | "android" | "web"
+  SortBy,          // "trending" | "publishedAt" | "popularity"
+  Screen,          // Ecran avec metadata, patterns, elements, CDN URLs
+  SearchableApp,   // App du catalogue
+  PopularApp,      // App populaire
+  DictionaryCategory, // Categorie de filtres
+  SupabaseSession, // Session d'authentification
+} from "mobbin-sdk";
+```
+
+### Exemple complet
+
+```typescript
+import { MobbinClient } from "mobbin-sdk";
+import { writeFile } from "node:fs/promises";
 
 const client = new MobbinClient({
   credentials: { email: "user@example.com", password: "..." },
 });
 await client.init();
+
+// Rechercher des ecrans de checkout dans les apps Finance
+const result = await client.screens.search(
+  {
+    platform: "ios",
+    screenPatterns: ["Checkout"],
+    appCategories: ["Finance"],
+  },
+  { pageSize: 5, sortBy: "popularity" },
+);
+
+console.log(`${result.data.length} ecrans trouves`);
+
+// Telecharger le premier ecran
+const screen = result.data[0];
+const buffer = await client.screens.download(screen.screenCdnImgSources.src);
+await writeFile(`${screen.appName}_checkout.webp`, Buffer.from(buffer));
+
+console.log(`Telecharge: ${screen.appName} (${screen.screenPatterns.join(", ")})`);
 ```
-
-### Resources
-
-Le client expose les resources suivantes :
-
-| Resource | Description |
-|----------|-------------|
-| `client.auth` | Authentification (login, refresh, getUser) |
-| `client.screens` | Recherche et telechargement d'ecrans |
-| `client.apps` | Recherche et liste d'apps |
-| `client.filters` | Categories de filtres |
-| `client.collections` | Collections utilisateur |
-| `client.search` | Recherche globale (trending, etc.) |

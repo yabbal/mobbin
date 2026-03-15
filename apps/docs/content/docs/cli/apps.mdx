@@ -1,36 +1,72 @@
 ---
 title: apps
-description: Recherche et navigation d'apps
+description: Explorer le catalogue d'applications referencees sur Mobbin.
 ---
 
 ## mobbin apps
 
+Explorez les applications referencees sur Mobbin. Chaque app contient des dizaines d'ecrans captures et annotes.
+
+---
+
 ### search
 
+Recherchez des apps par categorie.
+
 ```bash
-mobbin apps search -c Finance -l 10
+# Apps Finance sur iOS
+mobbin apps search -c Finance
+
+# Apps Shopping et Entertainment
+mobbin apps search -c "Shopping,Entertainment" -l 10
+
+# Apps web
+mobbin apps search -p web -l 5
 ```
+
+---
 
 ### list
 
-Lister toutes les apps disponibles pour une plateforme.
+Affichez le catalogue complet d'une plateforme. Utile pour savoir quelles apps sont disponibles.
 
 ```bash
+# Toutes les apps iOS (800+)
 mobbin apps list -p ios
+
+# Toutes les apps web
 mobbin apps list -p web
+
+# En tableau (50 premiers)
+mobbin apps list -t
 ```
+
+---
 
 ### popular
 
-Apps populaires par categorie.
+Decouvrez les apps les plus populaires, organisees par categorie.
 
 ```bash
-mobbin apps popular -p ios -t
+# Apps populaires iOS
+mobbin apps popular
+
+# En tableau
+mobbin apps popular -t
+
+# Apps populaires web, 5 par categorie
+mobbin apps popular -p web -l 5
 ```
 
-| Option | Description |
-|--------|-------------|
-| `-p, --platform` | `ios` (defaut), `android`, `web` |
-| `-c, --categories` | Categories (virgules) |
-| `-l, --limit` | Nombre de resultats |
-| `-t, --table` | Affichage en tableau |
+**Exemple de sortie (tableau) :**
+
+```
+┌──────────────────┬────────────┬────────────┐
+│ Name             │ Category   │ Popularity │
+├──────────────────┼────────────┼────────────┤
+│ Character AI     │ AI         │ 892        │
+│ Brex             │ Business   │ 756        │
+│ Duolingo         │ Education  │ 721        │
+│ Robinhood        │ Finance    │ 698        │
+└──────────────────┴────────────┴────────────┘
+```

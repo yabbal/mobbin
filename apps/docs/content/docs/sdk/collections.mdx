@@ -1,13 +1,18 @@
 ---
 title: Collections
-description: Collections utilisateur
+description: Acceder aux collections sauvegardees de l'utilisateur.
 ---
 
 ## CollectionsResource
+
+Les collections sont des groupes d'ecrans sauvegardes par l'utilisateur via l'interface web de Mobbin.
 
 ### list
 
 ```typescript
 const collections = await client.collections.list();
-// Collection[]
+
+for (const collection of collections) {
+  console.log(`${collection.name} (${collection.id})`);
+}
 ```

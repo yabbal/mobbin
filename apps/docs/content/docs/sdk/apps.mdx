@@ -1,33 +1,52 @@
 ---
 title: Apps
-description: Recherche et liste d'apps
+description: Explorer le catalogue d'applications referencees sur Mobbin.
 ---
 
 ## AppsResource
 
+Explorez les applications indexees par Mobbin.
+
 ### search
+
+Recherche d'apps par categorie. Combine le catalogue et les apps populaires pour filtrer.
 
 ```typescript
 const result = await client.apps.search(
-  { platform: "ios", appCategories: ["Finance"] },
+  {
+    platform: "ios",
+    appCategories: ["Finance", "Shopping"],
+  },
   { pageSize: 10 },
 );
+
+for (const app of result.data) {
+  console.log(`${app.appName} — ${app.appTagline}`);
+}
 ```
 
 ### list
 
-Catalogue complet d'une plateforme.
+Retourne le catalogue complet d'une plateforme. C'est la source de verite pour savoir quelles apps sont disponibles.
 
 ```typescript
-const apps = await client.apps.list("ios");
-// SearchableApp[]
+const allApps = await client.apps.list("ios");
+console.log(`${allApps.length} apps iOS disponibles`);
+
+// Filtrer localement
+const financeApps = allApps.filter((a) =>
+  a.keywords?.includes("finance"),
+);
 ```
 
 ### popular
 
-Apps populaires avec previews.
+Apps populaires avec previews, organisees par categorie.
 
 ```typescript
-const popular = await client.apps.popular("ios", 10);
-// PopularApp[]
+const popular = await client.apps.popular("ios", 5); // 5 par categorie
+
+for (const app of popular) {
+  console.log(`${app.app_name} (${app.app_category}) — score: ${app.popularity_metric}`);
+}
 ```

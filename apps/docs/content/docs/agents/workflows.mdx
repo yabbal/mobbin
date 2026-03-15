@@ -1,0 +1,107 @@
+---
+title: Workflows
+description: Exemples de workflows IA avec Mobbin pour le design et le developpement.
+---
+
+## Workflows types
+
+Voici des scenarios concrets ou Mobbin enrichit le travail avec un agent IA.
+
+---
+
+### 1. Implementer un ecran a partir de references
+
+Vous travaillez sur un ecran de login et voulez voir comment les meilleures apps le font :
+
+```bash
+# Etape 1 : Rechercher des references
+mobbin screens search --patterns Login -c "Finance,Shopping" --sort popularity -l 10
+
+# Etape 2 : Telecharger les meilleures
+mobbin screens download --patterns Login -c Finance --sort popularity -l 5 -o ./login-refs
+
+# Etape 3 : L'agent peut analyser les images et s'en inspirer
+```
+
+---
+
+### 2. Audit UX d'un concurrent
+
+Vous voulez analyser l'app d'un concurrent :
+
+```bash
+# Trouver l'app
+mobbin apps list -p ios | jq '.[] | select(.appName | test("Revolut"))'
+
+# Voir ses ecrans
+mobbin screens search -k "Revolut" -l 20
+```
+
+---
+
+### 3. Explorer les tendances UI
+
+Quels patterns sont tendance en ce moment ?
+
+```bash
+# Ecrans les plus trending
+mobbin screens search --sort trending -l 10
+
+# Patterns d'onboarding tendance
+mobbin screens search --patterns Onboarding --sort trending -l 10
+
+# Elements UI tendance
+mobbin screens search --elements "Bottom Sheet" --sort trending
+```
+
+---
+
+### 4. Creer un moodboard rapidement
+
+```bash
+# Telecharger un mix de references
+mobbin screens download --patterns "Home" -c Entertainment -l 5 -o ./moodboard
+mobbin screens download --patterns "My Account & Profile" -l 5 -o ./moodboard
+mobbin screens download --elements "Card" -c "AI" -l 5 -o ./moodboard
+```
+
+---
+
+### 5. Script d'export automatise
+
+```typescript
+import { MobbinClient } from "mobbin-sdk";
+import { writeFile, mkdir } from "node:fs/promises";
+
+const client = new MobbinClient({
+  credentials: {
+    email: process.env.MOBBIN_EMAIL!,
+    password: process.env.MOBBIN_PASSWORD!,
+  },
+});
+await client.init();
+
+const patterns = ["Login", "Signup", "Checkout", "Settings"];
+
+for (const pattern of patterns) {
+  await mkdir(`./export/${pattern}`, { recursive: true });
+
+  const result = await client.screens.search(
+    { platform: "ios", screenPatterns: [pattern] },
+    { pageSize: 5, sortBy: "popularity" },
+  );
+
+  for (const screen of result.data) {
+    const buffer = await client.screens.download(
+      screen.screenCdnImgSources.src,
+    );
+    const name = screen.appName.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
+    await writeFile(
+      `./export/${pattern}/${name}.webp`,
+      Buffer.from(buffer),
+    );
+  }
+
+  console.log(`${pattern}: ${result.data.length} ecrans exportes`);
+}
+```

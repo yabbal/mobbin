@@ -3,9 +3,9 @@ import "./global.css";
 import type { ReactNode } from "react";
 
 export const metadata = {
-	title: { default: "Mobbin CLI", template: "%s | Mobbin CLI" },
+	title: { default: "Mobbin CLI & SDK", template: "%s | Mobbin CLI" },
 	description:
-		"SDK TypeScript & CLI non officiels pour Mobbin — recherche et telechargement de references de design UI",
+		"CLI et SDK TypeScript non officiels pour Mobbin — recherchez, explorez et telechargez des references de design UI depuis votre terminal.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

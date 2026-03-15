@@ -1,26 +1,48 @@
 ---
 title: filters
-description: Exploration des filtres disponibles
+description: Decouvrir les filtres disponibles pour affiner vos recherches.
 ---
 
 ## mobbin filters
 
+Avant de chercher, il est utile de savoir quels filtres existent. La commande `filters` vous donne acces au dictionnaire complet des patterns, elements UI et categories.
+
+---
+
 ### list
 
-Lister les categories de filtres et leurs valeurs.
-
 ```bash
-# Toutes les categories
+# Voir toutes les categories de filtres
 mobbin filters list
 
-# Valeurs d'une categorie
+# Voir les patterns d'ecran disponibles (110+)
 mobbin filters list -c screenPatterns
-mobbin filters list -c screenElements
+
+# Voir les elements UI
+mobbin filters list -c screenElements -t
+
+# Voir les categories d'apps
 mobbin filters list -c appCategories
+
+# Voir les actions de flow
 mobbin filters list -c flowActions
 ```
 
-| Option | Description |
-|--------|-------------|
-| `-c, --category` | Slug de la categorie |
-| `-t, --table` | Affichage en tableau |
+**Categories de filtres :**
+
+| Slug | Description | Exemples |
+|------|-------------|----------|
+| `screenPatterns` | Types d'ecrans | Login, Signup, Checkout, Settings, Home, Onboarding |
+| `screenElements` | Composants UI | Button, Card, Bottom Sheet, Dialog, Toast, Tab Bar |
+| `appCategories` | Categories d'apps | Finance, Shopping, Entertainment, Health & Fitness |
+| `flowActions` | Actions utilisateur | Creating Account, Filtering & Sorting, Editing Profile |
+| `styles` | Styles visuels | Dark Mode, Glassmorphism, Minimalist |
+
+Chaque entree du dictionnaire contient un `displayName`, une `definition` et des `synonyms`, ce qui permet de comprendre exactement ce que chaque filtre represente.
+
+**Astuce :** Utilisez les filtres en combinaison dans `screens search` pour des resultats tres precis :
+
+```bash
+# Ecrans de paywall dans les apps Health & Fitness avec un style dark
+mobbin screens search --patterns "Subscription & Paywall" -c "Health & Fitness"
+```

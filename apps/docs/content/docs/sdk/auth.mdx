@@ -1,35 +1,54 @@
 ---
 title: Auth
-description: Authentification SDK
+description: Authentification — login, refresh token et gestion de session.
 ---
 
 ## AuthResource
 
+La ressource `auth` gere la connexion a Mobbin via Supabase Auth.
+
 ### checkEmail
 
-Verifie la methode d'authentification d'un email.
+Verifie la methode d'authentification disponible pour un email. Certains comptes utilisent un mot de passe, d'autres un lien magique.
 
 ```typescript
 const type = await client.auth.checkEmail("user@example.com");
 // "password" | "magic_link"
+
+if (type === "magic_link") {
+  console.log("Ce compte utilise un lien magique (non supporte par le SDK)");
+}
 ```
 
 ### login
 
+Connecte l'utilisateur et retourne une session Supabase complete.
+
 ```typescript
 const session = await client.auth.login("user@example.com", "password");
-// { access_token, refresh_token, expires_at, user }
+
+console.log(session.access_token); // JWT token
+console.log(session.expires_at);   // Timestamp d'expiration (secondes)
+console.log(session.user.id);      // UUID utilisateur
+console.log(session.user.email);   // Email
 ```
+
+La session contient un `access_token` (JWT, expire apres 1h) et un `refresh_token` (longue duree).
 
 ### refresh
 
+Rafraichit la session avec le refresh token.
+
 ```typescript
 const newSession = await client.auth.refresh(session.refresh_token);
+// Nouvelle session avec un nouveau access_token
 ```
 
 ### getUser
 
+Recupere les informations de l'utilisateur connecte.
+
 ```typescript
 const user = await client.auth.getUser();
-// { id, email, ... }
+console.log(user.id, user.email);
 ```

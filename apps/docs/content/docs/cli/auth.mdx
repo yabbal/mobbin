@@ -1,30 +1,42 @@
 ---
 title: auth
-description: Commandes d'authentification
+description: Gestion de l'authentification — connexion, deconnexion et verification du statut.
 ---
 
 ## mobbin auth
 
-Gestion de la session d'authentification Mobbin.
+Avant de pouvoir utiliser le CLI, vous devez vous connecter avec votre compte [Mobbin](https://mobbin.com/). Un compte gratuit suffit, mais certaines fonctionnalites peuvent etre limitees selon votre abonnement.
 
 ### login
 
-```bash
-# Interactif
-mobbin auth login
+Connectez-vous a votre compte Mobbin.
 
-# Non-interactif
-mobbin auth login -e user@example.com -p password
+**Mode interactif** (recommande) :
+
+```bash
+mobbin auth login
 ```
 
-| Option | Description |
-|--------|-------------|
-| `-e, --email` | Adresse email |
-| `-p, --password` | Mot de passe |
+Le CLI vous demandera votre email et mot de passe via des prompts securises.
 
-La session est stockee dans `~/.config/mobbin/auth.json`.
+**Mode non-interactif** (pour les scripts) :
+
+```bash
+mobbin auth login -e user@example.com -p "votre_mot_de_passe"
+```
+
+| Option | Alias | Description |
+|--------|-------|-------------|
+| `--email` | `-e` | Adresse email du compte Mobbin |
+| `--password` | `-p` | Mot de passe |
+
+Vous pouvez aussi utiliser les variables d'environnement `MOBBIN_EMAIL` et `MOBBIN_PASSWORD`.
+
+> La session est stockee dans `~/.config/mobbin/auth.json` avec des permissions restrictives (600). Le token expire apres 1 heure mais est automatiquement rafraichi.
 
 ### logout
+
+Supprime la session locale.
 
 ```bash
 mobbin auth logout
@@ -32,8 +44,20 @@ mobbin auth logout
 
 ### status
 
+Verifie si vous etes connecte et affiche les informations de session.
+
 ```bash
 mobbin auth status
 ```
 
-Retourne le statut d'authentification, l'email, et la date d'expiration du token.
+**Exemple de sortie :**
+
+```json
+{
+  "authenticated": true,
+  "expired": false,
+  "email": "user@example.com",
+  "userId": "63585ffe-a240-4615-8b17-afc4bd00629f",
+  "expiresAt": "2026-03-15T17:48:46.000Z"
+}
+```

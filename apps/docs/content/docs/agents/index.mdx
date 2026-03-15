@@ -1,0 +1,40 @@
+---
+title: Agents IA
+description: Integrer Mobbin avec des agents IA comme Claude Code pour enrichir vos workflows de design.
+---
+
+## Mobbin pour les agents IA
+
+Le CLI et le SDK Mobbin sont concus pour etre utilises par des agents IA. Toutes les commandes produisent du **JSON structure** sur `stdout`, ce qui les rend facilement parsables par des LLMs.
+
+### Pourquoi utiliser Mobbin avec un agent IA ?
+
+Quand un agent IA (comme Claude Code) travaille sur une interface, il peut :
+
+1. **Rechercher des references** — "Montre-moi comment les apps Finance font leur ecran de login"
+2. **Telecharger des inspirations** — Obtenir des images reelles d'apps populaires
+3. **Analyser des patterns** — Comprendre quels patterns UI sont tendance
+4. **Comparer des approches** — Voir comment differentes apps resolvent le meme probleme UX
+
+### Sortie JSON par defaut
+
+Contrairement a la plupart des CLIs, Mobbin CLI produit du JSON par defaut (pas du texte formatte). C'est un choix delibere pour faciliter l'integration avec des agents :
+
+```bash
+# L'agent peut parser directement la sortie
+mobbin screens search --patterns Login -l 3
+```
+
+```json
+{
+  "data": [
+    {
+      "appName": "Netflix",
+      "screenPatterns": ["Login"],
+      "screenCdnImgSources": {
+        "src": "https://..."
+      }
+    }
+  ]
+}
+```
